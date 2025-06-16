@@ -1,0 +1,646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Reports" targetNamespace="http://tempuri.org/Reports.xsd" xmlns:mstns="http://tempuri.org/Reports.xsd" xmlns="http://tempuri.org/Reports.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="finalprojectConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="finalprojectConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.labDB_Interface.Properties.Settings.GlobalReference.Default.finalprojectConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Top10GpaTableAdapter" GeneratorDataComponentClassName="Top10GpaTableAdapter" Name="Top10Gpa" UserDataComponentName="Top10GpaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT TOP 10 u.FullName, s.GPA
+FROM Students s
+JOIN Users u ON s.UserID = u.UserID
+ORDER BY s.GPA DESC
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="FullName" DataSetColumn="FullName" />
+              <Mapping SourceColumn="GPA" DataSetColumn="GPA" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SkillsTableAdapter" GeneratorDataComponentClassName="SkillsTableAdapter" Name="Skills" UserDataComponentName="SkillsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectName="finalproject.dbo.Skills" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT TOP 10 sk.SkillName, COUNT(ss.StudentID) AS Frequency
+FROM StudentSkills ss
+JOIN Skills sk ON ss.SkillID = sk.SkillID
+GROUP BY sk.SkillName
+ORDER BY Frequency DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SkillName" DataSetColumn="SkillName" />
+              <Mapping SourceColumn="Frequency" DataSetColumn="Frequency" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="topinterviewsTableAdapter" GeneratorDataComponentClassName="topinterviewsTableAdapter" Name="topinterviews" UserDataComponentName="topinterviewsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    u.FullName AS RecruiterName,
+    c.CompanyName,
+    COUNT(i.InterviewID) AS TotalInterviews
+FROM 
+    Recruiters r
+JOIN 
+    Users u ON r.UserID = u.UserID
+JOIN 
+    Companies c ON r.CompanyID = c.CompanyID
+LEFT JOIN 
+    Interviews i ON r.RecruiterID = i.RecruiterID
+GROUP BY 
+    u.FullName, c.CompanyName
+ORDER BY 
+    TotalInterviews DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RecruiterName" DataSetColumn="RecruiterName" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="TotalInterviews" DataSetColumn="TotalInterviews" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="offerratioTableAdapter" GeneratorDataComponentClassName="offerratioTableAdapter" Name="offerratio" UserDataComponentName="offerratioTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    u.FullName AS RecruiterName,
+    c.CompanyName,
+    COUNT(i.InterviewID) AS TotalInterviews,
+    COUNT(CASE WHEN i.Result = 'Selected' THEN 1 END) AS TotalOffers,
+    CAST(
+        COUNT(CASE WHEN i.Result = 'Selected' THEN 1 END) * 100.0 / 
+        NULLIF(COUNT(i.InterviewID), 0) AS DECIMAL(5,2)
+    ) AS OfferRatioPercent
+FROM 
+    Interviews i
+JOIN 
+    Recruiters r ON i.RecruiterID = r.RecruiterID
+JOIN 
+    Users u ON r.UserID = u.UserID
+JOIN 
+    Companies c ON r.CompanyID = c.CompanyID
+GROUP BY 
+    u.FullName, c.CompanyName
+ORDER BY 
+    OfferRatioPercent DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RecruiterName" DataSetColumn="RecruiterName" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="TotalInterviews" DataSetColumn="TotalInterviews" />
+              <Mapping SourceColumn="TotalOffers" DataSetColumn="TotalOffers" />
+              <Mapping SourceColumn="OfferRatioPercent" DataSetColumn="OfferRatioPercent" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ratingsTableAdapter" GeneratorDataComponentClassName="ratingsTableAdapter" Name="ratings" UserDataComponentName="ratingsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    u.FullName AS RecruiterName,
+    c.CompanyName,
+    COUNT(rv.ReviewID) AS TotalReviews,
+    AVG(CAST(rv.Rating AS FLOAT)) AS AverageRating
+FROM 
+    Reviews rv
+JOIN 
+    Interviews i ON rv.InterviewID = i.InterviewID
+JOIN 
+    Recruiters r ON i.RecruiterID = r.RecruiterID
+JOIN 
+    Users u ON r.UserID = u.UserID
+JOIN 
+    Companies c ON r.CompanyID = c.CompanyID
+GROUP BY 
+    u.FullName, c.CompanyName
+ORDER BY 
+    AverageRating DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RecruiterName" DataSetColumn="RecruiterName" />
+              <Mapping SourceColumn="CompanyName" DataSetColumn="CompanyName" />
+              <Mapping SourceColumn="TotalReviews" DataSetColumn="TotalReviews" />
+              <Mapping SourceColumn="AverageRating" DataSetColumn="AverageRating" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="placementrateTableAdapter" GeneratorDataComponentClassName="placementrateTableAdapter" Name="placementrate" UserDataComponentName="placementrateTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    COUNT(DISTINCT s.StudentID) AS TotalApplicants,
+    COUNT(DISTINCT CASE WHEN i.Result = 'Selected' THEN s.StudentID END) AS PlacedStudents,
+    CAST(
+        COUNT(DISTINCT CASE WHEN i.Result = 'Selected' THEN s.StudentID END) * 100.0 / 
+        NULLIF(COUNT(DISTINCT s.StudentID), 0) AS DECIMAL(5,2)
+    ) AS PlacementRate
+FROM 
+    Applications a
+JOIN 
+    Students s ON a.StudentID = s.StudentID
+LEFT JOIN 
+    Interviews i ON i.ApplicationID = a.ApplicationID;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TotalApplicants" DataSetColumn="TotalApplicants" />
+              <Mapping SourceColumn="PlacedStudents" DataSetColumn="PlacedStudents" />
+              <Mapping SourceColumn="PlacementRate" DataSetColumn="PlacementRate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="deptwisestatsTableAdapter" GeneratorDataComponentClassName="deptwisestatsTableAdapter" Name="deptwisestats" UserDataComponentName="deptwisestatsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectName="finalproject.dbo.Students" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    s.DegreeProgram AS Department,
+    COUNT(DISTINCT s.StudentID) AS TotalApplicants,
+    COUNT(DISTINCT CASE WHEN i.Result = 'Selected' THEN s.StudentID END) AS PlacedStudents,
+    CAST(
+        COUNT(DISTINCT CASE WHEN i.Result = 'Selected' THEN s.StudentID END) * 100.0 /
+        NULLIF(COUNT(DISTINCT s.StudentID), 0) AS DECIMAL(5,2)
+    ) AS PlacementRate
+FROM 
+    Applications a
+JOIN 
+    Students s ON a.StudentID = s.StudentID
+LEFT JOIN 
+    Interviews i ON i.ApplicationID = a.ApplicationID
+GROUP BY 
+    s.DegreeProgram
+ORDER BY 
+    PlacementRate DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Department" DataSetColumn="Department" />
+              <Mapping SourceColumn="TotalApplicants" DataSetColumn="TotalApplicants" />
+              <Mapping SourceColumn="PlacedStudents" DataSetColumn="PlacedStudents" />
+              <Mapping SourceColumn="PlacementRate" DataSetColumn="PlacementRate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BoothsTableAdapter" GeneratorDataComponentClassName="BoothsTableAdapter" Name="Booths" UserDataComponentName="BoothsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectName="finalproject.dbo.Booths" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [Booths] WHERE (([BoothID] = @Original_BoothID) AND ((@IsNull_Location = 1 AND [Location] IS NULL) OR ([Location] = @Original_Location)) AND ((@IsNull_VisitorCount = 1 AND [VisitorCount] IS NULL) OR ([VisitorCount] = @Original_VisitorCount)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_BoothID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Location" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [Booths] ([Location], [VisitorCount]) VALUES (@Location, @VisitorCount);
+SELECT BoothID, Location, VisitorCount FROM Booths AS b WHERE (BoothID = SCOPE_IDENTITY()) ORDER BY VisitorCount DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    b.BoothID,
+    b.Location,
+    b.VisitorCount
+FROM 
+    Booths b
+ORDER BY 
+    b.VisitorCount DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [Booths] SET [Location] = @Location, [VisitorCount] = @VisitorCount WHERE (([BoothID] = @Original_BoothID) AND ((@IsNull_Location = 1 AND [Location] IS NULL) OR ([Location] = @Original_Location)) AND ((@IsNull_VisitorCount = 1 AND [VisitorCount] IS NULL) OR ([VisitorCount] = @Original_VisitorCount)));
+SELECT BoothID, Location, VisitorCount FROM Booths AS b WHERE (BoothID = @BoothID) ORDER BY VisitorCount DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_BoothID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Location" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="BoothID" ColumnName="BoothID" DataSourceName="finalproject.dbo.Booths" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@BoothID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BoothID" DataSetColumn="BoothID" />
+              <Mapping SourceColumn="Location" DataSetColumn="Location" />
+              <Mapping SourceColumn="VisitorCount" DataSetColumn="VisitorCount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="peakhoursTableAdapter" GeneratorDataComponentClassName="peakhoursTableAdapter" Name="peakhours" UserDataComponentName="peakhoursTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectName="finalproject.dbo.Booths" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [Booths] WHERE (([BoothID] = @Original_BoothID) AND ((@IsNull_Location = 1 AND [Location] IS NULL) OR ([Location] = @Original_Location)) AND ((@IsNull_VisitorCount = 1 AND [VisitorCount] IS NULL) OR ([VisitorCount] = @Original_VisitorCount)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_BoothID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Location" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [Booths] ([Location], [VisitorCount]) VALUES (@Location, @VisitorCount);
+SELECT BoothID, Location, VisitorCount FROM Booths AS b WHERE (BoothID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    b.BoothID,
+    b.Location,
+    b.VisitorCount
+FROM 
+    Booths b;</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [Booths] SET [Location] = @Location, [VisitorCount] = @VisitorCount WHERE (([BoothID] = @Original_BoothID) AND ((@IsNull_Location = 1 AND [Location] IS NULL) OR ([Location] = @Original_Location)) AND ((@IsNull_VisitorCount = 1 AND [VisitorCount] IS NULL) OR ([VisitorCount] = @Original_VisitorCount)));
+SELECT BoothID, Location, VisitorCount FROM Booths AS b WHERE (BoothID = @BoothID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_BoothID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Location" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Location" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Location" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_VisitorCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="VisitorCount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="BoothID" ColumnName="BoothID" DataSourceName="finalproject.dbo.Booths" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@BoothID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="BoothID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BoothID" DataSetColumn="BoothID" />
+              <Mapping SourceColumn="Location" DataSetColumn="Location" />
+              <Mapping SourceColumn="VisitorCount" DataSetColumn="VisitorCount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ResourceusageTableAdapter" GeneratorDataComponentClassName="ResourceusageTableAdapter" Name="Resourceusage" UserDataComponentName="ResourceusageTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    b.BoothID, 
+    b.Location, 
+    COUNT(sbc.StudentID) AS VisitorCount,
+    bc.CoordinatorID, 
+    u.Fullname AS CoordinatorName,
+    bc.ShiftTime,
+    DATEDIFF(MINUTE, 
+        CAST(SUBSTRING(bc.ShiftTime, 1, CHARINDEX('-', bc.ShiftTime) - 1) AS DATETIME), 
+        CAST(SUBSTRING(bc.ShiftTime, CHARINDEX('-', bc.ShiftTime) + 1, LEN(bc.ShiftTime)) AS DATETIME)
+    ) AS ShiftDurationMinutes
+FROM Booths b
+LEFT JOIN StudentBoothCheckIn sbc ON b.BoothID = sbc.BoothID
+LEFT JOIN BoothCoordinators bc ON b.BoothID = bc.AssignedBoothID
+LEFT JOIN Users u ON bc.UserID = u.UserID
+GROUP BY b.BoothID, b.Location, bc.CoordinatorID, u.Fullname, bc.ShiftTime
+ORDER BY VisitorCount DESC, ShiftDurationMinutes DESC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="BoothID" DataSetColumn="BoothID" />
+              <Mapping SourceColumn="Location" DataSetColumn="Location" />
+              <Mapping SourceColumn="VisitorCount" DataSetColumn="VisitorCount" />
+              <Mapping SourceColumn="CoordinatorID" DataSetColumn="CoordinatorID" />
+              <Mapping SourceColumn="CoordinatorName" DataSetColumn="CoordinatorName" />
+              <Mapping SourceColumn="ShiftTime" DataSetColumn="ShiftTime" />
+              <Mapping SourceColumn="ShiftDurationMinutes" DataSetColumn="ShiftDurationMinutes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="avg SalaryyTableAdapter" GeneratorDataComponentClassName="avg_SalaryyTableAdapter" Name="avg Salaryy" UserDataComponentName="avg SalaryyTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="finalprojectConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    AVG(CAST(REPLACE(REPLACE(LEFT(SalaryRange, CHARINDEX('-', SalaryRange) - 1), 'k', ''), 'K', '') AS FLOAT) * 1000) AS AverageMinSalary,
+    AVG(CAST(REPLACE(REPLACE(SUBSTRING(
+        SalaryRange,
+        CHARINDEX('-', SalaryRange) + 1,
+        CHARINDEX(' ', SalaryRange + ' ') - CHARINDEX('-', SalaryRange) - 1
+    ), 'k', ''), 'K', '') AS FLOAT) * 1000) AS AverageMaxSalary
+FROM 
+    Interviews i
+JOIN 
+    Applications a ON i.ApplicationID = a.ApplicationID
+JOIN 
+    JobPostings j ON a.JobID = j.JobID
+WHERE 
+    i.Result = 'Selected'
+    AND j.SalaryRange LIKE '%-%';
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AverageMinSalary" DataSetColumn="AverageMinSalary" />
+              <Mapping SourceColumn="AverageMaxSalary" DataSetColumn="AverageMaxSalary" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Reports" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Reports" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Reports">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DeptWiseStudents" msprop:Generator_RowEvHandlerName="DeptWiseStudentsRowChangeEventHandler" msprop:Generator_RowDeletedName="DeptWiseStudentsRowDeleted" msprop:Generator_RowDeletingName="DeptWiseStudentsRowDeleting" msprop:Generator_RowEvArgName="DeptWiseStudentsRowChangeEvent" msprop:Generator_TablePropName="DeptWiseStudents" msprop:Generator_RowChangedName="DeptWiseStudentsRowChanged" msprop:Generator_UserTableName="DeptWiseStudents" msprop:Generator_RowChangingName="DeptWiseStudentsRowChanging" msprop:Generator_RowClassName="DeptWiseStudentsRow" msprop:Generator_TableClassName="DeptWiseStudentsDataTable" msprop:Generator_TableVarName="tableDeptWiseStudents">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DegreeProgram" msprop:Generator_ColumnPropNameInTable="DegreeProgramColumn" msprop:Generator_ColumnPropNameInRow="DegreeProgram" msprop:Generator_UserColumnName="DegreeProgram" msprop:Generator_ColumnVarNameInTable="columnDegreeProgram" type="xs:string" minOccurs="0" />
+              <xs:element name="StudentCount" msprop:Generator_ColumnPropNameInTable="StudentCountColumn" msprop:Generator_ColumnPropNameInRow="StudentCount" msprop:Generator_UserColumnName="StudentCount" msprop:Generator_ColumnVarNameInTable="columnStudentCount" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Top10Gpa" msprop:Generator_RowEvHandlerName="Top10GpaRowChangeEventHandler" msprop:Generator_RowDeletedName="Top10GpaRowDeleted" msprop:Generator_RowDeletingName="Top10GpaRowDeleting" msprop:Generator_RowEvArgName="Top10GpaRowChangeEvent" msprop:Generator_TablePropName="Top10Gpa" msprop:Generator_RowChangedName="Top10GpaRowChanged" msprop:Generator_UserTableName="Top10Gpa" msprop:Generator_RowChangingName="Top10GpaRowChanging" msprop:Generator_RowClassName="Top10GpaRow" msprop:Generator_TableClassName="Top10GpaDataTable" msprop:Generator_TableVarName="tableTop10Gpa">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_UserColumnName="FullName" msprop:Generator_ColumnVarNameInTable="columnFullName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GPA" msprop:Generator_ColumnPropNameInTable="GPAColumn" msprop:Generator_ColumnPropNameInRow="GPA" msprop:Generator_UserColumnName="GPA" msprop:Generator_ColumnVarNameInTable="columnGPA" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Skills" msprop:Generator_RowEvHandlerName="SkillsRowChangeEventHandler" msprop:Generator_RowDeletedName="SkillsRowDeleted" msprop:Generator_RowDeletingName="SkillsRowDeleting" msprop:Generator_RowEvArgName="SkillsRowChangeEvent" msprop:Generator_TablePropName="Skills" msprop:Generator_RowChangedName="SkillsRowChanged" msprop:Generator_UserTableName="Skills" msprop:Generator_RowChangingName="SkillsRowChanging" msprop:Generator_RowClassName="SkillsRow" msprop:Generator_TableClassName="SkillsDataTable" msprop:Generator_TableVarName="tableSkills">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SkillName" msprop:Generator_ColumnPropNameInTable="SkillNameColumn" msprop:Generator_ColumnPropNameInRow="SkillName" msprop:Generator_UserColumnName="SkillName" msprop:Generator_ColumnVarNameInTable="columnSkillName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Frequency" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="FrequencyColumn" msprop:Generator_ColumnPropNameInRow="Frequency" msprop:Generator_UserColumnName="Frequency" msprop:Generator_ColumnVarNameInTable="columnFrequency" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="topinterviews" msprop:Generator_RowClassName="topinterviewsRow" msprop:Generator_RowEvHandlerName="topinterviewsRowChangeEventHandler" msprop:Generator_RowDeletedName="topinterviewsRowDeleted" msprop:Generator_RowDeletingName="topinterviewsRowDeleting" msprop:Generator_RowEvArgName="topinterviewsRowChangeEvent" msprop:Generator_TablePropName="topinterviews" msprop:Generator_RowChangedName="topinterviewsRowChanged" msprop:Generator_UserTableName="topinterviews" msprop:Generator_RowChangingName="topinterviewsRowChanging" msprop:Generator_TableClassName="topinterviewsDataTable" msprop:Generator_TableVarName="tabletopinterviews">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RecruiterName" msprop:Generator_UserColumnName="RecruiterName" msprop:Generator_ColumnPropNameInTable="RecruiterNameColumn" msprop:Generator_ColumnPropNameInRow="RecruiterName" msprop:Generator_ColumnVarNameInTable="columnRecruiterName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_UserColumnName="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalInterviews" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TotalInterviews" msprop:Generator_ColumnPropNameInTable="TotalInterviewsColumn" msprop:Generator_ColumnPropNameInRow="TotalInterviews" msprop:Generator_ColumnVarNameInTable="columnTotalInterviews" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="offerratio" msprop:Generator_RowClassName="offerratioRow" msprop:Generator_RowEvHandlerName="offerratioRowChangeEventHandler" msprop:Generator_RowDeletedName="offerratioRowDeleted" msprop:Generator_RowDeletingName="offerratioRowDeleting" msprop:Generator_RowEvArgName="offerratioRowChangeEvent" msprop:Generator_TablePropName="offerratio" msprop:Generator_RowChangedName="offerratioRowChanged" msprop:Generator_UserTableName="offerratio" msprop:Generator_RowChangingName="offerratioRowChanging" msprop:Generator_TableClassName="offerratioDataTable" msprop:Generator_TableVarName="tableofferratio">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RecruiterName" msprop:Generator_UserColumnName="RecruiterName" msprop:Generator_ColumnPropNameInTable="RecruiterNameColumn" msprop:Generator_ColumnPropNameInRow="RecruiterName" msprop:Generator_ColumnVarNameInTable="columnRecruiterName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_UserColumnName="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalInterviews" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TotalInterviews" msprop:Generator_ColumnPropNameInTable="TotalInterviewsColumn" msprop:Generator_ColumnPropNameInRow="TotalInterviews" msprop:Generator_ColumnVarNameInTable="columnTotalInterviews" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalOffers" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TotalOffers" msprop:Generator_ColumnPropNameInTable="TotalOffersColumn" msprop:Generator_ColumnPropNameInRow="TotalOffers" msprop:Generator_ColumnVarNameInTable="columnTotalOffers" type="xs:int" minOccurs="0" />
+              <xs:element name="OfferRatioPercent" msdata:ReadOnly="true" msprop:Generator_UserColumnName="OfferRatioPercent" msprop:Generator_ColumnPropNameInTable="OfferRatioPercentColumn" msprop:Generator_ColumnPropNameInRow="OfferRatioPercent" msprop:Generator_ColumnVarNameInTable="columnOfferRatioPercent" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ratings" msprop:Generator_RowClassName="ratingsRow" msprop:Generator_RowEvHandlerName="ratingsRowChangeEventHandler" msprop:Generator_RowDeletedName="ratingsRowDeleted" msprop:Generator_RowDeletingName="ratingsRowDeleting" msprop:Generator_RowEvArgName="ratingsRowChangeEvent" msprop:Generator_TablePropName="ratings" msprop:Generator_RowChangedName="ratingsRowChanged" msprop:Generator_UserTableName="ratings" msprop:Generator_RowChangingName="ratingsRowChanging" msprop:Generator_TableClassName="ratingsDataTable" msprop:Generator_TableVarName="tableratings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RecruiterName" msprop:Generator_UserColumnName="RecruiterName" msprop:Generator_ColumnPropNameInTable="RecruiterNameColumn" msprop:Generator_ColumnPropNameInRow="RecruiterName" msprop:Generator_ColumnVarNameInTable="columnRecruiterName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyName" msprop:Generator_UserColumnName="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalReviews" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TotalReviews" msprop:Generator_ColumnPropNameInTable="TotalReviewsColumn" msprop:Generator_ColumnPropNameInRow="TotalReviews" msprop:Generator_ColumnVarNameInTable="columnTotalReviews" type="xs:int" minOccurs="0" />
+              <xs:element name="AverageRating" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AverageRating" msprop:Generator_ColumnPropNameInTable="AverageRatingColumn" msprop:Generator_ColumnPropNameInRow="AverageRating" msprop:Generator_ColumnVarNameInTable="columnAverageRating" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="placementrate" msprop:Generator_RowEvHandlerName="placementrateRowChangeEventHandler" msprop:Generator_RowDeletedName="placementrateRowDeleted" msprop:Generator_RowDeletingName="placementrateRowDeleting" msprop:Generator_RowEvArgName="placementrateRowChangeEvent" msprop:Generator_TablePropName="placementrate" msprop:Generator_RowChangedName="placementrateRowChanged" msprop:Generator_RowChangingName="placementrateRowChanging" msprop:Generator_TableClassName="placementrateDataTable" msprop:Generator_RowClassName="placementrateRow" msprop:Generator_TableVarName="tableplacementrate" msprop:Generator_UserTableName="placementrate">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TotalApplicants" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="TotalApplicants" msprop:Generator_ColumnPropNameInTable="TotalApplicantsColumn" msprop:Generator_ColumnVarNameInTable="columnTotalApplicants" msprop:Generator_UserColumnName="TotalApplicants" type="xs:int" minOccurs="0" />
+              <xs:element name="PlacedStudents" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="PlacedStudents" msprop:Generator_ColumnPropNameInTable="PlacedStudentsColumn" msprop:Generator_ColumnVarNameInTable="columnPlacedStudents" msprop:Generator_UserColumnName="PlacedStudents" type="xs:int" minOccurs="0" />
+              <xs:element name="PlacementRate" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="PlacementRate" msprop:Generator_ColumnPropNameInTable="PlacementRateColumn" msprop:Generator_ColumnVarNameInTable="columnPlacementRate" msprop:Generator_UserColumnName="PlacementRate" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="deptwisestats" msprop:Generator_RowEvHandlerName="deptwisestatsRowChangeEventHandler" msprop:Generator_RowDeletedName="deptwisestatsRowDeleted" msprop:Generator_RowDeletingName="deptwisestatsRowDeleting" msprop:Generator_RowEvArgName="deptwisestatsRowChangeEvent" msprop:Generator_TablePropName="deptwisestats" msprop:Generator_RowChangedName="deptwisestatsRowChanged" msprop:Generator_RowChangingName="deptwisestatsRowChanging" msprop:Generator_TableClassName="deptwisestatsDataTable" msprop:Generator_RowClassName="deptwisestatsRow" msprop:Generator_TableVarName="tabledeptwisestats" msprop:Generator_UserTableName="deptwisestats">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Department" msprop:Generator_ColumnPropNameInRow="Department" msprop:Generator_ColumnPropNameInTable="DepartmentColumn" msprop:Generator_ColumnVarNameInTable="columnDepartment" msprop:Generator_UserColumnName="Department" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalApplicants" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="TotalApplicants" msprop:Generator_ColumnPropNameInTable="TotalApplicantsColumn" msprop:Generator_ColumnVarNameInTable="columnTotalApplicants" msprop:Generator_UserColumnName="TotalApplicants" type="xs:int" minOccurs="0" />
+              <xs:element name="PlacedStudents" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="PlacedStudents" msprop:Generator_ColumnPropNameInTable="PlacedStudentsColumn" msprop:Generator_ColumnVarNameInTable="columnPlacedStudents" msprop:Generator_UserColumnName="PlacedStudents" type="xs:int" minOccurs="0" />
+              <xs:element name="PlacementRate" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="PlacementRate" msprop:Generator_ColumnPropNameInTable="PlacementRateColumn" msprop:Generator_ColumnVarNameInTable="columnPlacementRate" msprop:Generator_UserColumnName="PlacementRate" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Booths" msprop:Generator_RowEvHandlerName="BoothsRowChangeEventHandler" msprop:Generator_RowDeletedName="BoothsRowDeleted" msprop:Generator_RowDeletingName="BoothsRowDeleting" msprop:Generator_RowEvArgName="BoothsRowChangeEvent" msprop:Generator_TablePropName="Booths" msprop:Generator_RowChangedName="BoothsRowChanged" msprop:Generator_RowChangingName="BoothsRowChanging" msprop:Generator_TableClassName="BoothsDataTable" msprop:Generator_RowClassName="BoothsRow" msprop:Generator_TableVarName="tableBooths" msprop:Generator_UserTableName="Booths">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BoothID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="BoothID" msprop:Generator_ColumnPropNameInTable="BoothIDColumn" msprop:Generator_ColumnVarNameInTable="columnBoothID" msprop:Generator_UserColumnName="BoothID" type="xs:int" />
+              <xs:element name="Location" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_UserColumnName="Location" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VisitorCount" msprop:Generator_ColumnPropNameInRow="VisitorCount" msprop:Generator_ColumnPropNameInTable="VisitorCountColumn" msprop:Generator_ColumnVarNameInTable="columnVisitorCount" msprop:Generator_UserColumnName="VisitorCount" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="peakhours" msprop:Generator_RowEvHandlerName="peakhoursRowChangeEventHandler" msprop:Generator_RowDeletedName="peakhoursRowDeleted" msprop:Generator_RowDeletingName="peakhoursRowDeleting" msprop:Generator_RowEvArgName="peakhoursRowChangeEvent" msprop:Generator_TablePropName="peakhours" msprop:Generator_RowChangedName="peakhoursRowChanged" msprop:Generator_RowChangingName="peakhoursRowChanging" msprop:Generator_TableClassName="peakhoursDataTable" msprop:Generator_RowClassName="peakhoursRow" msprop:Generator_TableVarName="tablepeakhours" msprop:Generator_UserTableName="peakhours">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BoothID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="BoothID" msprop:Generator_ColumnPropNameInTable="BoothIDColumn" msprop:Generator_ColumnVarNameInTable="columnBoothID" msprop:Generator_UserColumnName="BoothID" type="xs:int" />
+              <xs:element name="Location" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_UserColumnName="Location" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VisitorCount" msprop:Generator_ColumnPropNameInRow="VisitorCount" msprop:Generator_ColumnPropNameInTable="VisitorCountColumn" msprop:Generator_ColumnVarNameInTable="columnVisitorCount" msprop:Generator_UserColumnName="VisitorCount" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Resourceusage" msprop:Generator_RowEvHandlerName="ResourceusageRowChangeEventHandler" msprop:Generator_RowDeletedName="ResourceusageRowDeleted" msprop:Generator_RowDeletingName="ResourceusageRowDeleting" msprop:Generator_RowEvArgName="ResourceusageRowChangeEvent" msprop:Generator_TablePropName="Resourceusage" msprop:Generator_RowChangedName="ResourceusageRowChanged" msprop:Generator_RowChangingName="ResourceusageRowChanging" msprop:Generator_TableClassName="ResourceusageDataTable" msprop:Generator_RowClassName="ResourceusageRow" msprop:Generator_TableVarName="tableResourceusage" msprop:Generator_UserTableName="Resourceusage">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BoothID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="BoothID" msprop:Generator_ColumnPropNameInTable="BoothIDColumn" msprop:Generator_ColumnVarNameInTable="columnBoothID" msprop:Generator_UserColumnName="BoothID" type="xs:int" />
+              <xs:element name="Location" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_UserColumnName="Location" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VisitorCount" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="VisitorCount" msprop:Generator_ColumnPropNameInTable="VisitorCountColumn" msprop:Generator_ColumnVarNameInTable="columnVisitorCount" msprop:Generator_UserColumnName="VisitorCount" type="xs:int" minOccurs="0" />
+              <xs:element name="CoordinatorID" msprop:Generator_ColumnPropNameInRow="CoordinatorID" msprop:Generator_ColumnPropNameInTable="CoordinatorIDColumn" msprop:Generator_ColumnVarNameInTable="columnCoordinatorID" msprop:Generator_UserColumnName="CoordinatorID" type="xs:int" minOccurs="0" />
+              <xs:element name="CoordinatorName" msprop:Generator_ColumnPropNameInRow="CoordinatorName" msprop:Generator_ColumnPropNameInTable="CoordinatorNameColumn" msprop:Generator_ColumnVarNameInTable="columnCoordinatorName" msprop:Generator_UserColumnName="CoordinatorName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ShiftTime" msprop:Generator_ColumnPropNameInRow="ShiftTime" msprop:Generator_ColumnPropNameInTable="ShiftTimeColumn" msprop:Generator_ColumnVarNameInTable="columnShiftTime" msprop:Generator_UserColumnName="ShiftTime" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ShiftDurationMinutes" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="ShiftDurationMinutes" msprop:Generator_ColumnPropNameInTable="ShiftDurationMinutesColumn" msprop:Generator_ColumnVarNameInTable="columnShiftDurationMinutes" msprop:Generator_UserColumnName="ShiftDurationMinutes" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="avg_x0020_Salaryy" msprop:Generator_RowEvHandlerName="avg_SalaryyRowChangeEventHandler" msprop:Generator_RowDeletedName="avg_SalaryyRowDeleted" msprop:Generator_RowDeletingName="avg_SalaryyRowDeleting" msprop:Generator_RowEvArgName="avg_SalaryyRowChangeEvent" msprop:Generator_TablePropName="avg_Salaryy" msprop:Generator_RowChangedName="avg_SalaryyRowChanged" msprop:Generator_RowChangingName="avg_SalaryyRowChanging" msprop:Generator_TableClassName="avg_SalaryyDataTable" msprop:Generator_RowClassName="avg_SalaryyRow" msprop:Generator_TableVarName="tableavg_Salaryy" msprop:Generator_UserTableName="avg Salaryy">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AverageMinSalary" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AverageMinSalary" msprop:Generator_ColumnPropNameInTable="AverageMinSalaryColumn" msprop:Generator_ColumnVarNameInTable="columnAverageMinSalary" msprop:Generator_UserColumnName="AverageMinSalary" type="xs:double" minOccurs="0" />
+              <xs:element name="AverageMaxSalary" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="AverageMaxSalary" msprop:Generator_ColumnPropNameInTable="AverageMaxSalaryColumn" msprop:Generator_ColumnVarNameInTable="columnAverageMaxSalary" msprop:Generator_UserColumnName="AverageMaxSalary" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Booths" />
+      <xs:field xpath="mstns:BoothID" />
+    </xs:unique>
+    <xs:unique name="peakhours_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:peakhours" />
+      <xs:field xpath="mstns:BoothID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
